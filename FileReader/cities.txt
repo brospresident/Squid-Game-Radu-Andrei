@@ -1,0 +1,65 @@
+Albany
+Americus
+Andersonville
+Athens
+Atlanta
+Augusta
+Bainbridge
+Blairsville
+Brunswick
+Calhoun
+Carrollton
+Columbus
+Dahlonega
+Dalton
+Darien
+Decatur
+Douglas
+East Point
+Fitzgerald
+Fort Valley
+Gainesville
+La Grange
+Macon
+Marietta
+Milledgeville
+Plains
+Rome
+Savannah
+Toccoa
+Valdosta
+Warm Springs
+Warner Robins
+Washington
+Waycross
+Hawaii
+Hanalei
+Hilo
+Honaunau
+Honolulu
+Kahului
+Kaneohe
+Kapaa
+Kawaihae
+Lahaina
+Laie
+Wahiawa
+Wailuku
+Waimea
+Idaho
+Blackfoot
+Boise
+Bonners Ferry
+Caldwell
+Coeur d’Alene
+Idaho City
+Idaho Falls
+Kellogg
+Lewiston
+Moscow
+Nampa
+Pocatello
+Priest River
+Rexburg
+Sun Valley
+Twin Falls

@@ -37,3 +37,7 @@ bool Competitor::getIsEliminated() {
 void Competitor::setIsEliminated(bool isEliminated) {
     this->isEliminated = isEliminated;
 }
+
+bool Competitor::operator > (const Competitor& competitor) {
+    return this->participantNumber > competitor.participantNumber;
+}

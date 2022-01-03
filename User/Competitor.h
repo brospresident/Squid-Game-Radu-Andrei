@@ -17,6 +17,8 @@ class Competitor : public User {
         void setParticipantNumber(int participantNumber);
         bool getIsEliminated();
         void setIsEliminated(bool isEliminated);
+
+        bool operator > (const Competitor& competitor);
 };
 
 #endif

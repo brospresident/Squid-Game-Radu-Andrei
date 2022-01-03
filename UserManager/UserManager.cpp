@@ -87,3 +87,62 @@ void UserManager::randomizeTeams(std::vector<Competitor>& competitors, std::vect
         std::cout << error << std::endl;
     }
 }
+
+Competitor UserManager::getWinner(std::vector<Competitor>& competitors) {
+    try {
+        if (competitors.size() == 0) {
+            throw "No competitors to find the winner of.";
+        }
+
+        for (Competitor& competitor : competitors) {
+            if (!competitor.getIsEliminated()) {
+                return competitor;
+            }
+        }
+
+        throw "No winner found.";
+    } 
+    catch (const char* error) {
+        std::cout << error << std::endl;
+        return Competitor();
+    }
+}
+
+void UserManager::printWinner(std::vector<Competitor>& competitors) {
+    try {
+        if (competitors.size() == 0) {
+            throw "No competitors to find the winner of.";
+        }
+
+        Competitor winner = this->getWinner(competitors);
+        int prize = this->computeWinnerPrize(competitors);
+        std::cout << "The winner is " << winner.getFirstName() << " " << winner.getLastName() << " with participant number " << winner.getParticipantNumber() << " and prize " << prize << "." << std::endl;
+        std::cout << "The amount of money he has left is " << prize - winner.getDebt() << "." << std::endl;
+        return;
+    } 
+    catch (const char* error) {
+        std::cout << error << std::endl;
+    }
+}
+
+int UserManager::computeWinnerPrize(std::vector<Competitor>& competitors) {
+    try {
+        if (competitors.size() == 0) {
+            throw "No competitors to find the winner of.";
+        }
+
+        int res = 0;
+
+        for (int i = 0; i < competitors.size(); i++) {
+            if (competitors[i].getIsEliminated() == true) {
+                res += competitors[i].getDebt();
+            }
+        }
+        return res;
+
+    } 
+    catch (const char* error) {
+        std::cout << error << std::endl;
+        return 0;
+    }
+}

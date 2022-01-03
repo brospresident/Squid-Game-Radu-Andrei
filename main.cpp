@@ -12,6 +12,13 @@
 #include "./Teams/Triangle.h"
 #include "./Teams/Rectangle.h"
 
+// Games
+#include "./Games/Game.h"
+#include "./Games/RLGL.h"
+#include "./Games/TugOfWar.h"
+#include "./Games/Marbles.h"
+#include "./Games/Genken.h"
+
 using namespace std;
 
 int main () {
@@ -21,12 +28,28 @@ int main () {
 
     UserManager userManager;
     userManager.assignParticipantNumbers(competitors);
-    userManager.printRemainingUsers(competitors);
 
     Circle circleTeam;
     Triangle triangleTeam;
     Rectangle rectangleTeam;
 
-    
+    userManager.randomizeTeams(competitors, supervisors, circleTeam, triangleTeam, rectangleTeam);
+
+    RLGL rlgl("Red Light Green Light", "Every user with even participant number will be eliminated.");
+    rlgl.play(competitors);
+    rlgl.printRemainingUsers(circleTeam, triangleTeam, rectangleTeam, competitors);
+
+    TugOfWar tugOfWar("Tug of War", "Competitors are split in 4 teams. We compute the weight of every team and the team with the lowest weight will be eliminated.");
+    tugOfWar.play(competitors);
+    tugOfWar.printRemainingUsers(circleTeam, triangleTeam, rectangleTeam, competitors);
+
+    Marbles marbles("Marbles", "The competitors are split in pairs of two. Every competitor rolls a dice and the one with the lowest number will be eliminated.");
+    marbles.play(competitors);
+    marbles.printRemainingUsers(circleTeam, triangleTeam, rectangleTeam, competitors);
+
+    Genken genken("Genken", "The competitors are playing 1v1 Rock papers scissors until there is only one competitor left.");
+    genken.play(competitors);
+
+    userManager.printWinner(competitors);
     return 0;
 }

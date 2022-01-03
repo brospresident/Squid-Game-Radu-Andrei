@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <string>
+#include <algorithm>
+#include <iostream>
 
 #include "../User/Competitor.h"
 #include "../User/Supervisor.h"
@@ -17,10 +19,6 @@ class Team {
         std::vector<Competitor> getCompetitors();
         std::vector<Supervisor> getSupervisors();
 
-        // setters
-        // void setCompetitors(std::vector<Competitor&> competitors);
-        // void setSupervisors(std::vector<Supervisor&> supervisors);
-
         // methods
         void addCompetitor(Competitor& competitor);
         virtual void addSupervisor(Supervisor& supervisor) = 0;
@@ -28,6 +26,10 @@ class Team {
 
         bool doesTeamHaveSupervisor(Supervisor supervisor);
         bool doesTeamHaveCompetitor(Competitor competitor);
+
+        void updateTeam(std::vector<Competitor> competitors);
+
+        void printSupervisors();
 };
 
 #endif

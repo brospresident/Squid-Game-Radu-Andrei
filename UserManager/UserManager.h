@@ -16,6 +16,9 @@ class UserManager {
         void assignParticipantNumbers(std::vector<Competitor>& competitors);
         Competitor getCompetitor(int participantNumber, std::vector<Competitor> competitors);
         void randomizeTeams(std::vector<Competitor>& competitors, std::vector<Supervisor>& supervisors, Circle& circleTeam, Triangle& triangleTeam, Rectangle& rectangleTeam);
+        Competitor getWinner(std::vector<Competitor>& competitors);
+        void printWinner(std::vector<Competitor>& competitors);
+        int computeWinnerPrize(std::vector<Competitor>& competitors);
 };
 
 #endif

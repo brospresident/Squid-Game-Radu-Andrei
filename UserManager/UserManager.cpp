@@ -1,5 +1,10 @@
 #include "./UserManager.h"
 
+/**
+ * @brief Method that prints the remaining users
+ * 
+ * @param competitors 
+ */
 void UserManager::printRemainingUsers(std::vector<Competitor> competitors) {
     std::cout << "Remaining users: " << std::endl;
     for (Competitor competitor : competitors) {
@@ -8,6 +13,11 @@ void UserManager::printRemainingUsers(std::vector<Competitor> competitors) {
     }
 }
 
+/**
+ * @brief Method that assigns participant numbers to the competitors
+ * 
+ * @param competitors 
+ */
 void UserManager::assignParticipantNumbers(std::vector<Competitor>& competitors) {
     try {
         if (competitors.size() == 0) {
@@ -24,6 +34,13 @@ void UserManager::assignParticipantNumbers(std::vector<Competitor>& competitors)
     }
 }
 
+/**
+ * @brief Method that returns a competitor based on the participant number
+ * 
+ * @param participantNumber 
+ * @param competitors 
+ * @return Competitor 
+ */
 Competitor UserManager::getCompetitor(int participantNumber, std::vector<Competitor> competitors) {
     try {
         if (participantNumber < 1 && participantNumber > 100) {
@@ -44,6 +61,15 @@ Competitor UserManager::getCompetitor(int participantNumber, std::vector<Competi
     }
 }
 
+/**
+ * @brief Method that creates the teams and randomizes the competitors and supervisors
+ * 
+ * @param competitors 
+ * @param supervisors 
+ * @param circleTeam 
+ * @param triangleTeam 
+ * @param rectangleTeam 
+ */
 void UserManager::randomizeTeams(std::vector<Competitor>& competitors, std::vector<Supervisor>& supervisors, Circle& circleTeam, Triangle& triangleTeam, Rectangle& rectangleTeam) {
     try {
         if (competitors.size() == 0) {
@@ -120,6 +146,12 @@ void UserManager::randomizeTeams(std::vector<Competitor>& competitors, std::vect
     }
 }
 
+/**
+ * @brief Method that returns the winner of the games
+ * 
+ * @param competitors 
+ * @return Competitor 
+ */
 Competitor UserManager::getWinner(std::vector<Competitor>& competitors) {
     try {
         if (competitors.size() == 0) {
@@ -140,6 +172,11 @@ Competitor UserManager::getWinner(std::vector<Competitor>& competitors) {
     }
 }
 
+/**
+ * @brief Method that prints relevant information about the winner of the game
+ * 
+ * @param competitors 
+ */
 void UserManager::printWinner(std::vector<Competitor>& competitors) {
     try {
         if (competitors.size() == 0) {
@@ -157,6 +194,12 @@ void UserManager::printWinner(std::vector<Competitor>& competitors) {
     }
 }
 
+/**
+ * @brief Method that computes the prize of the winner
+ * 
+ * @param competitors 
+ * @return int 
+ */
 int UserManager::computeWinnerPrize(std::vector<Competitor>& competitors) {
     try {
         if (competitors.size() == 0) {
@@ -179,6 +222,12 @@ int UserManager::computeWinnerPrize(std::vector<Competitor>& competitors) {
     }
 }
 
+/**
+ * @brief Method that prints the information of the competitors
+ * 
+ * @param competitors 
+ * @param supervisors 
+ */
 void UserManager::computeSupervisorPrize(std::vector<Competitor>& competitors, std::vector<Supervisor>& supervisors) {
     try {
         Competitor winner = this->getWinner(competitors);
@@ -207,6 +256,11 @@ void UserManager::computeSupervisorPrize(std::vector<Competitor>& competitors, s
     }
 }
 
+/**
+ * @brief Method that sorts the supervisors and prints information about them
+ * 
+ * @param supervisors 
+ */
 void UserManager::printDescendingSupervisors(std::vector<Supervisor>& supervisors) {
     try {
         if (supervisors.size() == 0) {
@@ -226,6 +280,12 @@ void UserManager::printDescendingSupervisors(std::vector<Supervisor>& supervisor
     }
 }
 
+/**
+ * @brief Method that computes the prize of every supervisor team
+ * 
+ * @param supervisors 
+ * @return int 
+ */
 int UserManager::computeSupervisorTeamWinnings(std::vector<Supervisor> supervisors) {
     try {
         if (supervisors.size() == 0) {
@@ -246,6 +306,14 @@ int UserManager::computeSupervisorTeamWinnings(std::vector<Supervisor> superviso
     }
 }
 
+/**
+ * @brief Method that finds what team won most money and prints the information about it
+ * 
+ * @param circleTeam 
+ * @param triangleTeam 
+ * @param rectangleTeam 
+ * @param supervisors 
+ */
 void UserManager::printHighestWinningTeam(Circle& circleTeam, Triangle& triangleTeam, Rectangle& rectangleTeam, std::vector<Supervisor>& supervisors) {
     circleTeam.updateTeam(supervisors);
     triangleTeam.updateTeam(supervisors);

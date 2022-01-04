@@ -3,6 +3,10 @@
 
 #include <string>
 
+/**
+ * @brief Class to represent the user data
+ * 
+ */
 class User {
     protected:
         std::string firstName;

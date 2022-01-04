@@ -1,11 +1,24 @@
 #include "./TugOfWar.h"
 
+/**
+ * @brief Construct a new Tug Of War:: Tug Of War object    // constructor
+ * 
+ * @param name 
+ * @param description 
+ */
 TugOfWar::TugOfWar(std::string name, std::string description) : Game(name, description) {
     std::cout << std::endl;
     std::cout << "The next game is " << this->getName() << "!" << std::endl;
     std::cout << this->getDescription() << std::endl;
 }
 
+/**
+ * @brief Method that check if a competitor is part of any Tug Of War team
+ * 
+ * @param competitor 
+ * @param team 
+ * @return if the competitor is part of the team given as parameter
+ */
 bool TugOfWar::isPartOfTeam(Competitor& competitor, std::vector<Competitor>& team) {
     for (Competitor& c : team) {
         if (c.getParticipantNumber() == competitor.getParticipantNumber()) {
@@ -15,6 +28,12 @@ bool TugOfWar::isPartOfTeam(Competitor& competitor, std::vector<Competitor>& tea
     return false;
 }
 
+/**
+ * @brief Method that computes weight of competitors in a team
+ * 
+ * @param team 
+ * @return int 
+ */
 int TugOfWar::computeWeights(std::vector<Competitor>& team) {
     int weight = 0;
     for (Competitor& c : team) {
@@ -23,6 +42,12 @@ int TugOfWar::computeWeights(std::vector<Competitor>& team) {
     return weight;
 }
 
+/**
+ * @brief Method that eliminates all competitors of a team
+ * 
+ * @param team 
+ * @param competitors 
+ */
 void TugOfWar::eliminateTeam(std::vector<Competitor>& team, std::vector<Competitor>& competitors) {
     for (int i = 0; i < competitors.size(); ++i) {
         if (this->isPartOfTeam(competitors[i], team)) {
@@ -31,6 +56,11 @@ void TugOfWar::eliminateTeam(std::vector<Competitor>& team, std::vector<Competit
     }
 }
 
+/**
+ * @brief Method that implements the logic of the Tug Of War game. Eliminates all competitors of a team if their weight is lower than the weight of the other team
+ * 
+ * @param competitors 
+ */
 void TugOfWar::play(std::vector<Competitor>& competitors) {
     std::cout << "The game is starting..." << std::endl;
 
@@ -43,7 +73,7 @@ void TugOfWar::play(std::vector<Competitor>& competitors) {
     std::vector<Competitor> Team3;
     std::vector<Competitor> Team4;
 
-    srand(time(NULL));
+    srand(time(NULL)); // initialize random seed
 
     // Randomly assign competitors that are not eliminated to teams 1-4 and make the teams have the same number of members
     for (int i = 0; i < competitors.size(); ++i) {
@@ -70,6 +100,9 @@ void TugOfWar::play(std::vector<Competitor>& competitors) {
     std::vector<Competitor> Winner1;
     std::vector<Competitor> Winner2;
 
+    // Implementing the team fights
+    // Team 1 is fighting team 2 then team 3 is fighting team 4
+    // In the end, the winner of the first fight fights the winner of the second fight
     std::cout << "Team 1 is fighting with Team 2!" << std::endl;
     int weight1 = this->computeWeights(Team1), weight2 = this->computeWeights(Team2);
     std::cout << "Team 1 has " << weight1 << " kg!" << std::endl;

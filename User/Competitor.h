@@ -4,6 +4,10 @@
 #include "./User.h"
 #include "./Supervisor.h"
 
+/**
+ * @brief Class to represent the competitor data. It inherits the User class
+ * 
+ */
 class Competitor : public User { 
     private:
         int participantNumber;

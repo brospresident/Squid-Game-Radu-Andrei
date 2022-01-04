@@ -10,6 +10,10 @@
 #include "../Teams/Triangle.h"
 #include "../Teams/Rectangle.h"
 
+/**
+ * @brief Class to manage the users and do certain actions on them
+ * 
+ */
 class UserManager {
     public:
         void printRemainingUsers(std::vector<Competitor> competitors);

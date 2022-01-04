@@ -9,6 +9,10 @@
 #include "../User/Competitor.h"
 #include "../User/Supervisor.h"
 
+/**
+ * @brief Abstract class that represents a team and has the common methods between teams
+ * 
+ */
 class Team {
     protected:
         std::vector<Competitor> competitors;

@@ -1,10 +1,21 @@
 #include "./Generator.h"
 
+/**
+ * @brief Construct a new Generator:: Generator object It also reads the data needed to randomly generate users    // constructor
+ * 
+ */
 Generator::Generator() {
     this->names = NamesReader("./FileReader/names.txt").getData();
     this->cities = CityReader("./FileReader/cities.txt").getData();
 }
 
+/**
+ * @brief Method that generates the numbers in the game by picking a random index in the names and cities vectors
+ * 
+ * @tparam T User / Supervisor / Competitor
+ * @param n 
+ * @return std::vector<T> of the generated users
+ */
 template <typename T>
 std::vector<T> Generator::generateUsers(int n) {
     std::vector<T> data;
@@ -22,5 +33,6 @@ std::vector<T> Generator::generateUsers(int n) {
     return data;
 }
 
+// Specific template initialisation
 template std::vector<Competitor> Generator::generateUsers<Competitor>(int);
 template std::vector<Supervisor> Generator::generateUsers<Supervisor>(int);

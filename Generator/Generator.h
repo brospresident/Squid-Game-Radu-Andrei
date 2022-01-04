@@ -9,6 +9,10 @@
 #include <vector>
 #include <string>
 
+/**
+ * @brief Class that generates the users in the game
+ * 
+ */
 class Generator {
     private:
         std::vector<std::string> names;

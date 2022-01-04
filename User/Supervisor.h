@@ -4,6 +4,10 @@
 #include "./User.h"
 #include <string>
 
+/**
+ * @brief Class to represent the supervisor data. It inherits the User class
+ * 
+ */
 class Supervisor : public User {
     private:
         std::string maskForm;

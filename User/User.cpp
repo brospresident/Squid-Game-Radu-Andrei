@@ -1,5 +1,6 @@
 #include "./User.h"
 
+// Default constructor
 User::User() {
     this->firstName = "";
     this->lastName = "";
@@ -8,6 +9,15 @@ User::User() {
     this->weight = 0;
 }
 
+/**
+ * @brief Construct a new User:: User object    
+ * 
+ * @param firstName 
+ * @param lastName 
+ * @param city 
+ * @param debt 
+ * @param weight 
+ */
 User::User(std::string firstName, std::string lastName, std::string city, int debt, int weight) {
     this->firstName = firstName;
     this->lastName = lastName;
@@ -58,6 +68,8 @@ void User::setWeight(int weight) {
     this->weight = weight;
 }
 
+
+// Operator overloading
 bool User::operator==(User& user) {
     return (this->firstName == user.firstName && this->lastName == user.lastName && this->city == user.city && this->debt == user.debt && this->weight == user.weight);
 }

@@ -8,6 +8,10 @@
 #include "../Teams/Triangle.h"
 #include "../Teams/Rectangle.h"
 
+/**
+ * @brief Game abstract class
+ *  This class is a general class that uses common methods between the games.
+ */
 class Game {
     private:
         std::string name;
@@ -24,6 +28,7 @@ class Game {
         void eliminate(Competitor& competitor);
         void eliminate(Competitor& competitor, std::vector<Competitor>& competitors);
 
+        // Abstract method that will implement the logic of every game
         virtual void play(std::vector<Competitor>& competitors) = 0;
 
         void printRemainingUsers(Circle& circleTeam, Triangle& triangleTeam, Rectangle& rectangleTeam, std::vector<Competitor>& competitors);

@@ -2,11 +2,13 @@
 #define _COMPETITOR_H_
 
 #include "./User.h"
+#include "./Supervisor.h"
 
 class Competitor : public User { 
     private:
         int participantNumber;
         bool isEliminated = false;
+        Supervisor assignedSupervisor;
 
     public:
         Competitor();
@@ -19,6 +21,8 @@ class Competitor : public User {
         void setIsEliminated(bool isEliminated);
 
         bool operator > (const Competitor& competitor);
+        Supervisor getAssignedSupervisor();
+        void setAssignedSupervisor(Supervisor assignedSupervisor);
 };
 
 #endif

@@ -12,3 +12,8 @@ FileReader::FileReader(std::string filePath) {
         std::cout << e.what() << std::endl;
     }
 }
+
+FileReader::~FileReader() {
+    this->file.close();
+    std::cout << "Closing file ... " << std::endl;
+}

@@ -57,19 +57,6 @@ void UserManager::randomizeTeams(std::vector<Competitor>& competitors, std::vect
         std::random_shuffle(competitors.begin(), competitors.end());
         std::random_shuffle(supervisors.begin(), supervisors.end());
 
-        // Assign the competitors to the teams
-        for (int i = 0; i < competitors.size(); i++) {
-            if (i < 33) {
-                circleTeam.addCompetitor(competitors[i]);
-            }
-            else if (i < 66) {
-                triangleTeam.addCompetitor(competitors[i]);
-            }
-            else {
-                rectangleTeam.addCompetitor(competitors[i]);
-            }
-        }
-
         // Assign the supervisors to the teams
         for (int i = 0; i < supervisors.size(); i++) {
             if (i < 3) {
@@ -80,6 +67,51 @@ void UserManager::randomizeTeams(std::vector<Competitor>& competitors, std::vect
             }
             else {
                 rectangleTeam.addSupervisor(supervisors[i]);
+            }
+        }
+
+        int circleSupervisorIndex = 0, triangleSupervisorIndex = 0, rectangleSupervisorIndex = 0;
+
+        // Assign the competitors to the teams and assign their supervisor
+        for (int i = 0; i < competitors.size(); i++) {
+            if (i < 33) {
+                if (circleTeam.getCompetitors().size() < 11) {
+                    circleSupervisorIndex = 0;
+                }
+                else if (circleTeam.getCompetitors().size() < 22) {
+                    circleSupervisorIndex = 1;
+                }
+                else {
+                    circleSupervisorIndex = 2;
+                }
+                competitors[i].setAssignedSupervisor(circleTeam.getSupervisors()[circleSupervisorIndex]);
+                circleTeam.addCompetitor(competitors[i]);
+            }
+            else if (i < 66) {
+                if (triangleTeam.getCompetitors().size() < 11) {
+                    triangleSupervisorIndex = 0;
+                }
+                else if (triangleTeam.getCompetitors().size() < 22) {
+                    triangleSupervisorIndex = 1;
+                }
+                else {
+                    triangleSupervisorIndex = 2;
+                }
+                competitors[i].setAssignedSupervisor(triangleTeam.getSupervisors()[triangleSupervisorIndex]);
+                triangleTeam.addCompetitor(competitors[i]);
+            }
+            else {
+                if (rectangleTeam.getCompetitors().size() < 11) {
+                    rectangleSupervisorIndex = 0;
+                }
+                else if (rectangleTeam.getCompetitors().size() < 22) {
+                    rectangleSupervisorIndex = 1;
+                }
+                else {
+                    rectangleSupervisorIndex = 2;
+                }
+                competitors[i].setAssignedSupervisor(rectangleTeam.getSupervisors()[rectangleSupervisorIndex]);
+                rectangleTeam.addCompetitor(competitors[i]);
             }
         }
     } 
@@ -144,5 +176,101 @@ int UserManager::computeWinnerPrize(std::vector<Competitor>& competitors) {
     catch (const char* error) {
         std::cout << error << std::endl;
         return 0;
+    }
+}
+
+void UserManager::computeSupervisorPrize(std::vector<Competitor>& competitors, std::vector<Supervisor>& supervisors) {
+    try {
+        Competitor winner = this->getWinner(competitors);
+        if (competitors.size() == 0) {
+            throw "No competitors to compute the prize.";
+        }
+        if (supervisors.size() == 0) {
+            throw "No supervisors to compute the prize.";
+        }
+
+        for (Supervisor& supervisor : supervisors) {
+            int res = 0;
+            for (Competitor& competitor : competitors) {
+                if (competitor.getAssignedSupervisor() == supervisor) {
+                    if (competitor == winner) {
+                        res += winner.getDebt() * 10;
+                    }
+                    else res += competitor.getDebt();
+                }
+            }
+            supervisor.setMoneyWon(res - supervisor.getDebt());
+        }
+    } 
+    catch (const char* error) {
+        std::cout << error << std::endl;
+    }
+}
+
+void UserManager::printDescendingSupervisors(std::vector<Supervisor>& supervisors) {
+    try {
+        if (supervisors.size() == 0) {
+            throw "No supervisors to print.";
+        }
+
+        std::sort(supervisors.begin(), supervisors.end(), [](Supervisor& a, Supervisor& b) {
+            return a.getMoneyWon() > b.getMoneyWon();
+        });
+
+        for (Supervisor& supervisor : supervisors) {
+            std::cout << "Supervisor " << supervisor.getFirstName() << " " << supervisor.getLastName() << " has won " << supervisor.getMoneyWon() << "$." << std::endl;
+        }
+    } 
+    catch (const char* error) {
+        std::cout << error << std::endl;
+    }
+}
+
+int UserManager::computeSupervisorTeamWinnings(std::vector<Supervisor> supervisors) {
+    try {
+        if (supervisors.size() == 0) {
+            throw "No supervisors to compute the prize.";
+        }
+
+        int res = 0;
+
+        for (Supervisor& supervisor : supervisors) {
+            res += supervisor.getMoneyWon();
+        }
+
+        return res;
+    } 
+    catch (const char* error) {
+        std::cout << error << std::endl;
+        return 0;
+    }
+}
+
+void UserManager::printHighestWinningTeam(Circle& circleTeam, Triangle& triangleTeam, Rectangle& rectangleTeam, std::vector<Supervisor>& supervisors) {
+    circleTeam.updateTeam(supervisors);
+    triangleTeam.updateTeam(supervisors);
+    rectangleTeam.updateTeam(supervisors);
+
+    int circleWinnings = circleTeam.computeSupervisorWinnings();
+    int triangleWinnings = triangleTeam.computeSupervisorWinnings();
+    int rectangleWinnings = rectangleTeam.computeSupervisorWinnings();
+
+    if (circleWinnings > triangleWinnings && circleWinnings > rectangleWinnings) {
+        std::cout << "The highest winning team is the circle team with " << circleWinnings << "$." << std::endl;
+        std::cout << "The team is composed of: " << std::endl;
+        circleTeam.printSupervisors();
+    }
+    else if (triangleWinnings > circleWinnings && triangleWinnings > rectangleWinnings) {
+        std::cout << "The highest winning team is the triangle team with " << triangleWinnings << "$." << std::endl;
+        std::cout << "The team is composed of: " << std::endl;
+        triangleTeam.printSupervisors();
+    }
+    else if (rectangleWinnings > circleWinnings && rectangleWinnings > triangleWinnings) {
+        std::cout << "The highest winning team is the rectangle team with " << rectangleWinnings << "$." << std::endl;
+        std::cout << "The team is composed of: " << std::endl;
+        rectangleTeam.printSupervisors();
+    }
+    else {
+        std::cout << "There is no highest winning team." << std::endl;
     }
 }

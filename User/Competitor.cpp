@@ -41,3 +41,11 @@ void Competitor::setIsEliminated(bool isEliminated) {
 bool Competitor::operator > (const Competitor& competitor) {
     return this->participantNumber > competitor.participantNumber;
 }
+
+Supervisor Competitor::getAssignedSupervisor() {
+    return this->assignedSupervisor;
+}
+
+void Competitor::setAssignedSupervisor(Supervisor assignedSupervisor) {
+    this->assignedSupervisor = assignedSupervisor;
+}

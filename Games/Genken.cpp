@@ -25,7 +25,10 @@ void Genken::play(std::vector<Competitor>& competitors) {
             int comp1Score = rand() % 3 + 1;
             int comp2Score = rand() % 3 + 1;
 
-            if (comp1Score == comp2Score) continue;
+            if (comp1Score == comp2Score) {
+                i -= 2;
+                continue;
+            }
             int winner = this->rockPaperScissors(comp1Score, comp2Score);
             if (winner == 1) {
                 this->eliminate(comp2, competitors);

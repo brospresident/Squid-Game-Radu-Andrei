@@ -12,6 +12,7 @@ class FileReader {
 
     public:
         FileReader(std::string filePath);
+        ~FileReader();
         virtual std::vector<std::string> getData() = 0;
 };
 

@@ -24,4 +24,4 @@ run:
 	./mainApp
 
 clear:
-	rm -f main
+	rm -f mainApp

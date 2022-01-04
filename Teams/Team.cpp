@@ -48,12 +48,32 @@ void Team::updateTeam(std::vector<Competitor> competitors) {
     }
 }
 
+void Team::updateTeam(std::vector<Supervisor> supervisors) {
+    for (int i = 0; i < this->supervisors.size(); i++) {
+        for (int j = 0; j < supervisors.size(); j++) {
+            if (this->supervisors[i] == supervisors[j]) {
+                this->supervisors[i] = supervisors[j];
+            }
+        }
+    }
+}
+
 void Team::printSupervisors() {
     std::sort(this->supervisors.begin(), this->supervisors.end(), [](Supervisor& s1, Supervisor& s2) {
         return s1.getDebt() > s2.getDebt();
     });
 
     for (Supervisor& s : this->supervisors) {
-        std::cout << s.getFirstName() << " " << s.getLastName() << " " << s.getDebt() << std::endl;
+        std::cout << s.getFirstName() << " " << s.getLastName() << " " << s.getMoneyWon() << std::endl;
     }
+}
+
+int Team::computeSupervisorWinnings() {
+    int res = 0;
+
+    for (Supervisor s : this->supervisors) {
+        res += s.getMoneyWon();
+    }
+
+    return res;
 }

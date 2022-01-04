@@ -7,6 +7,7 @@
 class Supervisor : public User {
     private:
         std::string maskForm;
+        int moneyWon = 0;
 
     public:
         Supervisor();
@@ -15,6 +16,8 @@ class Supervisor : public User {
 
         std::string getMaskForm();
         void setMaskForm(std::string maskForm);
+        int getMoneyWon();
+        void setMoneyWon(int moneyWon);
 };
 
 #endif

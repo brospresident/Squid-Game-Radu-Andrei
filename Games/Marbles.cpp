@@ -23,14 +23,16 @@ void Marbles::play(std::vector<Competitor>& competitors) {
         std::cout << comp1.getFirstName() << " " << comp1.getLastName() << " (" << comp1.getParticipantNumber() << ") has " << comp1Score << " points." << std::endl;
         std::cout << comp2.getFirstName() << " " << comp2.getLastName() << " (" << comp2.getParticipantNumber() << ") has " << comp2Score << " points." << std::endl;
 
-        if (comp1Score > comp2Score) {
+        if (comp1Score < comp2Score) {
             std::cout << comp1.getFirstName() << " " << comp1.getLastName() << " (" << comp1.getParticipantNumber() << ") has won the game!" << std::endl;
             this->eliminate(comp2, competitors);
-        } else if (comp1Score < comp2Score) {
+        } 
+        else if (comp1Score > comp2Score) {
             std::cout << comp2.getFirstName() << " " << comp2.getLastName() << " (" << comp2.getParticipantNumber() << ") has won the game!" << std::endl;
             this->eliminate(comp1, competitors);
-        } else {
-            std::cout << "It's a tie!" << std::endl;
+        } 
+        else {
+            i -= 2;
         }
     }
 }

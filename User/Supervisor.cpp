@@ -25,3 +25,11 @@ Supervisor::Supervisor(std::string firstName, std::string lastName, std::string 
 void Supervisor::setMaskForm(std::string maskForm) {
     this->maskForm = maskForm;
 }
+
+int Supervisor::getMoneyWon() {
+    return this->moneyWon;
+}
+
+void Supervisor::setMoneyWon(int moneyWon) {
+    this->moneyWon = moneyWon;
+}

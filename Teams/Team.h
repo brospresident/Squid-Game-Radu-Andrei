@@ -28,7 +28,8 @@ class Team {
         bool doesTeamHaveCompetitor(Competitor competitor);
 
         void updateTeam(std::vector<Competitor> competitors);
-
+        void updateTeam(std::vector<Supervisor> supervisors);
+        int computeSupervisorWinnings();
         void printSupervisors();
 };
 

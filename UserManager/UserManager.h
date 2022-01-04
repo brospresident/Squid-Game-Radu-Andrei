@@ -19,6 +19,10 @@ class UserManager {
         Competitor getWinner(std::vector<Competitor>& competitors);
         void printWinner(std::vector<Competitor>& competitors);
         int computeWinnerPrize(std::vector<Competitor>& competitors);
+        void computeSupervisorPrize(std::vector<Competitor>& competitors, std::vector<Supervisor>& supervisors);
+        void printDescendingSupervisors(std::vector<Supervisor>& supervisors);
+        int computeSupervisorTeamWinnings(std::vector<Supervisor> supervisors);
+        void printHighestWinningTeam(Circle& circleTeam, Triangle& triangleTeam, Rectangle& rectangleTeam, std::vector<Supervisor>& supervisors);
 };
 
 #endif

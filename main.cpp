@@ -51,5 +51,8 @@ int main () {
     genken.play(competitors);
 
     userManager.printWinner(competitors);
+    userManager.computeSupervisorPrize(competitors, supervisors);
+    userManager.printDescendingSupervisors(supervisors);
+    userManager.printHighestWinningTeam(circleTeam, triangleTeam, rectangleTeam, supervisors);
     return 0;
 }
